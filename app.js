@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 // Express application
 const app = express();
@@ -18,6 +19,13 @@ app.get('/health', (req, res) => {
     message: 'Express server is running 🚀',
   });
 });
+
+// Localhost MongoDB connection
+const DB_URI = 'mongodb://localhost:27017/';
+mongoose
+  .connect(DB_URI)
+  .then(conn => console.log('✅ MongoDB connected successfully'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Start the Server
 const PORT = 3000;
