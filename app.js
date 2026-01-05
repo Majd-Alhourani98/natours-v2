@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 
 // Express application
 const app = express();
@@ -20,24 +20,13 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Localhost MongoDB connection
-const DB_URI = 'mongodb://localhost:27017/';
-const connectDB = async () => {
-  try {
-    await mongoose.connect(DB_URI);
-    console.log('✅ MongoDB connected successfully');
-  } catch (error) {
-    console.error('❌ MongoDB connection error:', error);
-    process.exit(1);
-  }
-};
-
+// Connect to the database
 connectDB();
 
 // Start the Server
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`\n${'━'.repeat(15)} SERVER ${'━'.repeat(15)}`);
+  console.log(`\n${'━'.repeat(21)} SERVER ${'━'.repeat(21)}`);
   console.log(`🟢 STATUS       → Running `);
   console.log(`🔗 LINK         → http://localhost:${PORT}`);
   console.log(`🌍 ENVIRONMENT  → ${app.get('env')}`);
