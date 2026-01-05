@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const connectDB = require('./config/db');
 
 // Express application
 const app = express();
@@ -20,15 +19,4 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Connect to the database
-connectDB();
-
-// Start the Server
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`\n${'━'.repeat(21)} SERVER ${'━'.repeat(21)}`);
-  console.log(`🟢 STATUS       → Running `);
-  console.log(`🔗 LINK         → http://localhost:${PORT}`);
-  console.log(`🌍 ENVIRONMENT  → ${app.get('env')}`);
-  console.log(`⏰ STARTED AT   → ${new Date().toLocaleString()}\n`);
-});
+module.exports = app;
